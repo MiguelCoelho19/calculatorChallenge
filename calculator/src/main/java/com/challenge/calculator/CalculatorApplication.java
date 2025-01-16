@@ -12,6 +12,9 @@ public class CalculatorApplication {
 	}
 
 	public String round(double number, int precision) {
+		if (precision<0) {
+			throw new IllegalArgumentException("Precision can't be bellow 0");
+		}
 		String pattern = "#";
 		if (precision > 0) {
 			pattern += ".";
