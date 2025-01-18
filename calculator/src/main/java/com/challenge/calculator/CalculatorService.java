@@ -5,14 +5,33 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.text.DecimalFormat;
 
 @SpringBootApplication
-public class CalculatorApplication {
+public class CalculatorService {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CalculatorApplication.class, args);
+		SpringApplication.run(CalculatorService.class, args);
+	}
+
+	public String calculate(String request) {
+		String[] message = request.split(",");
+		double a = Double.parseDouble(message[1]);
+		double b = Double.parseDouble(message[2]);
+		int precision = Integer.parseInt(message[3]);
+		switch (message[0]) {
+			case "addition":
+				return addition(a, b, precision);
+			case "subtraction":
+				return subtraction(a, b, precision);
+			case "multiplication":
+				return multiplication(a, b, precision);
+			case "division":
+				return division(a, b, precision);
+			default:
+				return "Invalid operation";
+		}
 	}
 
 	public String round(double number, int precision) {
-		if (precision<0) {
+		if (precision < 0) {
 			throw new IllegalArgumentException("Precision can't be bellow 0");
 		}
 		String pattern = "#";
@@ -23,11 +42,11 @@ public class CalculatorApplication {
 			}
 		}
 
-		DecimalFormat df_obj = new DecimalFormat(pattern);
-		return df_obj.format(number);
+		DecimalFormat df = new DecimalFormat(pattern);
+		return df.format(number);
 	}
 
-	public String sum(double a, double b, int precision) {
+	public String addition(double a, double b, int precision) {
 		return round(a + b, precision);
 	}
 
@@ -40,7 +59,7 @@ public class CalculatorApplication {
 	}
 
 	public String division(double a, double b, int precision) {
-		if(b==0){
+		if (b == 0) {
 			throw new ArithmeticException("Cannot divide by zero");
 		}
 		return round(a / b, precision);
