@@ -1,4 +1,4 @@
-package com.challenge.rest;
+package com.challenge;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;

@@ -1,10 +1,15 @@
-package com.challenge.rest;
+package com.challenge;
 
 public class PayloadHandler {
     private double a;
     private double b;
     private int precision;
     public PayloadHandler(){}
+    public PayloadHandler(double a, double b){
+        this.a = a;
+        this.b = b;
+        this.precision = 2;
+    }
     public PayloadHandler(double a, double b, int precision){
         this.a = a;
         this.b = b;

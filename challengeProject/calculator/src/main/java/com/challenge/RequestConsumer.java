@@ -1,4 +1,4 @@
-package com.challenge.calculator;
+package com.challenge;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaHandler;
