@@ -36,7 +36,7 @@ public class CalculatorService {
 		}
 	}
 
-	public String round(double number, int precision) {
+	private String round(double number, int precision) {
 		if (precision < 0) {
 			return "Precision can't be bellow 0";
 		}
@@ -47,24 +47,27 @@ public class CalculatorService {
 				pattern += "#";
 			}
 		}
-
+		//To avoid the case 0*-4 = -0
+		if (number == 0) {
+			return "0";
+		}
 		DecimalFormat df = new DecimalFormat(pattern);
 		return df.format(number);
 	}
 
-	public String addition(double a, double b, int precision) {
+	private String addition(double a, double b, int precision) {
 		return round(a + b, precision);
 	}
 
-	public String subtraction(double a, double b, int precision) {
+	private String subtraction(double a, double b, int precision) {
 		return round(a - b, precision);
 	}
 
-	public String multiplication(double a, double b, int precision) {
+	private String multiplication(double a, double b, int precision) {
 		return round(a * b, precision);
 	}
 
-	public String division(double a, double b, int precision) {
+	private String division(double a, double b, int precision) {
 		if (b == 0) {
 			return "Cannot divide by zero";
 		}
