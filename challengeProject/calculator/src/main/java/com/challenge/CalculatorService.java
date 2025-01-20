@@ -2,7 +2,15 @@ package com.challenge;
 
 import java.text.DecimalFormat;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
 public class CalculatorService {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CalculatorService.class, args);
+	}
 
 	public String calculate(String request) {
 		String[] message = request.split(",");
@@ -36,7 +44,6 @@ public class CalculatorService {
 		}
 
 		DecimalFormat df = new DecimalFormat(pattern);
-		System.out.println(df.format(number));
 		return df.format(number);
 	}
 

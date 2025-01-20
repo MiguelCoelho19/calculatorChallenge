@@ -5,14 +5,17 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@SpringBootApplication
 @RequestMapping("/calculator")
 public class CalculatorController {
 
@@ -22,15 +25,23 @@ public class CalculatorController {
     @Autowired
     private ResponseConsumer responseConsumer;
 
-    @PostMapping("/addition")
-    public ResponseEntity<String> addition(@RequestBody PayloadHandler payload) {
+    public static void main(String[] args) {
+		SpringApplication.run(CalculatorController.class, args);
+	}
+
+    @GetMapping("/addition")
+    public ResponseEntity<String> addition(
+            @RequestParam double a,
+            @RequestParam double b,
+            @RequestParam int precision) {
         try {
             String correlationId = UUID.randomUUID().toString();
 
             CompletableFuture<String> future = new CompletableFuture<>();
             responseConsumer.registerRequest(correlationId, future);
 
-            requestProducer.sendRequest("calculator-request", correlationId + "|addition," + payload.toString());
+            requestProducer.sendRequest("calculator-request", 
+            correlationId + "|addition," + a + "," + b + "," + precision);
             
             String result = future.get(5, TimeUnit.SECONDS);
             return ResponseEntity.ok(result);
@@ -39,15 +50,19 @@ public class CalculatorController {
         }
     }
 
-    @PostMapping("/subtraction")
-    public ResponseEntity<String> subtraction(@RequestBody PayloadHandler payload) {
-        try {
-            String correlationId = UUID.randomUUID().toString();
+    @GetMapping("/subtraction")
+    public ResponseEntity<String> subtraction(
+        @RequestParam double a,
+        @RequestParam double b,
+        @RequestParam int precision) {
+    try {
+        String correlationId = UUID.randomUUID().toString();
 
-            CompletableFuture<String> future = new CompletableFuture<>();
-            responseConsumer.registerRequest(correlationId, future);
+        CompletableFuture<String> future = new CompletableFuture<>();
+        responseConsumer.registerRequest(correlationId, future);
 
-            requestProducer.sendRequest("calculator-request", correlationId + "|subtraction," + payload.toString());
+        requestProducer.sendRequest("calculator-request", 
+        correlationId + "|subtraction," + a + "," + b + "," + precision);
             
             String result = future.get(5, TimeUnit.SECONDS);
             return ResponseEntity.ok(result);
@@ -56,15 +71,19 @@ public class CalculatorController {
         }
     }
 
-    @PostMapping("/multiplication")
-    public ResponseEntity<String> multiplication(@RequestBody PayloadHandler payload) {
-        try {
-            String correlationId = UUID.randomUUID().toString();
+    @GetMapping("/multiplication")
+    public ResponseEntity<String> multiplication(
+        @RequestParam double a,
+        @RequestParam double b,
+        @RequestParam int precision) {
+    try {
+        String correlationId = UUID.randomUUID().toString();
 
-            CompletableFuture<String> future = new CompletableFuture<>();
-            responseConsumer.registerRequest(correlationId, future);
+        CompletableFuture<String> future = new CompletableFuture<>();
+        responseConsumer.registerRequest(correlationId, future);
 
-            requestProducer.sendRequest("calculator-request", correlationId + "|multiplication," + payload.toString());
+        requestProducer.sendRequest("calculator-request", 
+        correlationId + "|multiplication," + a + "," + b + "," + precision);
             
             String result = future.get(5, TimeUnit.SECONDS);
             return ResponseEntity.ok(result);
@@ -73,15 +92,19 @@ public class CalculatorController {
         }
     }
 
-    @PostMapping("/division")
-    public ResponseEntity<String> division(@RequestBody PayloadHandler payload) {
-        try {
-            String correlationId = UUID.randomUUID().toString();
+    @GetMapping("/division")
+    public ResponseEntity<String> division(
+        @RequestParam double a,
+        @RequestParam double b,
+        @RequestParam int precision) {
+    try {
+        String correlationId = UUID.randomUUID().toString();
 
-            CompletableFuture<String> future = new CompletableFuture<>();
-            responseConsumer.registerRequest(correlationId, future);
+        CompletableFuture<String> future = new CompletableFuture<>();
+        responseConsumer.registerRequest(correlationId, future);
 
-            requestProducer.sendRequest("calculator-request", correlationId + "|division," + payload.toString());
+        requestProducer.sendRequest("calculator-request", 
+        correlationId + "|division," + a + "," + b + "," + precision);
             
             String result = future.get(5, TimeUnit.SECONDS);
             return ResponseEntity.ok(result);
