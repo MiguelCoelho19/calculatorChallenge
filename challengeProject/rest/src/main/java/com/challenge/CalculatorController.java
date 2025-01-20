@@ -26,23 +26,23 @@ public class CalculatorController {
     private ResponseConsumer responseConsumer;
 
     public static void main(String[] args) {
-		SpringApplication.run(CalculatorController.class, args);
-	}
+        SpringApplication.run(CalculatorController.class, args);
+    }
 
     @GetMapping("/addition")
     public ResponseEntity<String> addition(
-            @RequestParam double a,
-            @RequestParam double b,
-            @RequestParam int precision) {
+            @RequestParam String a,
+            @RequestParam String b,
+            @RequestParam String precision) {
         try {
             String correlationId = UUID.randomUUID().toString();
 
             CompletableFuture<String> future = new CompletableFuture<>();
             responseConsumer.registerRequest(correlationId, future);
 
-            requestProducer.sendRequest("calculator-request", 
-            correlationId + "|addition," + a + "," + b + "," + precision);
-            
+            requestProducer.sendRequest("calculator-request",
+                    correlationId + "|addition," + a + "," + b + "," + precision);
+
             String result = future.get(5, TimeUnit.SECONDS);
             return ResponseEntity.ok(result);
         } catch (Exception e) {
@@ -52,18 +52,18 @@ public class CalculatorController {
 
     @GetMapping("/subtraction")
     public ResponseEntity<String> subtraction(
-        @RequestParam double a,
-        @RequestParam double b,
-        @RequestParam int precision) {
-    try {
-        String correlationId = UUID.randomUUID().toString();
+            @RequestParam String a,
+            @RequestParam String b,
+            @RequestParam String precision) {
+        try {
+            String correlationId = UUID.randomUUID().toString();
 
-        CompletableFuture<String> future = new CompletableFuture<>();
-        responseConsumer.registerRequest(correlationId, future);
+            CompletableFuture<String> future = new CompletableFuture<>();
+            responseConsumer.registerRequest(correlationId, future);
 
-        requestProducer.sendRequest("calculator-request", 
-        correlationId + "|subtraction," + a + "," + b + "," + precision);
-            
+            requestProducer.sendRequest("calculator-request",
+                    correlationId + "|subtraction," + a + "," + b + "," + precision);
+
             String result = future.get(5, TimeUnit.SECONDS);
             return ResponseEntity.ok(result);
         } catch (Exception e) {
@@ -73,18 +73,18 @@ public class CalculatorController {
 
     @GetMapping("/multiplication")
     public ResponseEntity<String> multiplication(
-        @RequestParam double a,
-        @RequestParam double b,
-        @RequestParam int precision) {
-    try {
-        String correlationId = UUID.randomUUID().toString();
+            @RequestParam String a,
+            @RequestParam String b,
+            @RequestParam String precision) {
+        try {
+            String correlationId = UUID.randomUUID().toString();
 
-        CompletableFuture<String> future = new CompletableFuture<>();
-        responseConsumer.registerRequest(correlationId, future);
+            CompletableFuture<String> future = new CompletableFuture<>();
+            responseConsumer.registerRequest(correlationId, future);
 
-        requestProducer.sendRequest("calculator-request", 
-        correlationId + "|multiplication," + a + "," + b + "," + precision);
-            
+            requestProducer.sendRequest("calculator-request",
+                    correlationId + "|multiplication," + a + "," + b + "," + precision);
+
             String result = future.get(5, TimeUnit.SECONDS);
             return ResponseEntity.ok(result);
         } catch (Exception e) {
@@ -94,18 +94,18 @@ public class CalculatorController {
 
     @GetMapping("/division")
     public ResponseEntity<String> division(
-        @RequestParam double a,
-        @RequestParam double b,
-        @RequestParam int precision) {
-    try {
-        String correlationId = UUID.randomUUID().toString();
+            @RequestParam String a,
+            @RequestParam String b,
+            @RequestParam String precision) {
+        try {
+            String correlationId = UUID.randomUUID().toString();
 
-        CompletableFuture<String> future = new CompletableFuture<>();
-        responseConsumer.registerRequest(correlationId, future);
+            CompletableFuture<String> future = new CompletableFuture<>();
+            responseConsumer.registerRequest(correlationId, future);
 
-        requestProducer.sendRequest("calculator-request", 
-        correlationId + "|division," + a + "," + b + "," + precision);
-            
+            requestProducer.sendRequest("calculator-request",
+                    correlationId + "|division," + a + "," + b + "," + precision);
+
             String result = future.get(5, TimeUnit.SECONDS);
             return ResponseEntity.ok(result);
         } catch (Exception e) {
