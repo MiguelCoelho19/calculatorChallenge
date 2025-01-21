@@ -28,9 +28,13 @@ Test the project manually using the following examples:
     http://localhost:8080/calculator/multiplication?a=-2&b=3&precision=1
     http://localhost:8080/calculator/division?a=2&b=3&precision=5
 
-To test different cases, replace the operation and values in the following formats:
-    'http://localhost:8080/calculator/' + [operation] + '?a=' + [value] + '&b=' + [value]
-    'http://localhost:8080/calculator/' + [operation] + '?a=' + [value] + '&b=' + [value] + '&precision=' + [p-int]
+To test different cases, replace the operation and values in the following format:
+    'http://localhost:8080/calculator/' + [operation] + '?' + 'a=' + [value-a] + '&' + 'b=' + [value-b] + '&' + 'precision=' + [p-int]
+
     operation can be: 'addition', 'subtraction', 'multiplication' or 'division'
-    value must be a number, it can be negative and have decimals
+    value-a and value-b must be numbers, they can be negative and have decimals
     p-int must be a number, it can't be negative or have decimals
+    value-a, value-b and p-int have default values (1, 2, 2 respectively), making the following examples valid as well:
+        http://localhost:8080/calculator/addition
+        http://localhost:8080/calculator/subtraction?b=4
+        http://localhost:8080/calculator/multiplication?precision=2&b=4
